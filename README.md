@@ -1,7 +1,7 @@
 Continuous Integration Demo
 ===========================
-[![Run Unit Tests](https://github.com/colarrbear/ci-demo/actions/workflows/python-unittest.yml/badge.svg)](https://github.com/colarrbear/ci-demo/actions/workflows/python-unittest.yml)
-[![Run flake8](https://github.com/colarrbear/ci-demo/actions/workflows/run-flake8.yml/badge.svg)](https://github.com/colarrbear/ci-demo/actions/workflows/run-flake8.yml)
+[![Run Unit Tests](../../actions/workflows/python-unittest.yml/badge.svg)](../../actions/workflows/python-unittest.yml)
+[![Run flake8](../../actions/workflows/run-flake8.yml/badge.svg)](../../actions/workflows/run-flake8.yml)
 
 This project demonstrates use of Github Actions to build and test a Python project.  
 
