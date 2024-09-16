@@ -5,9 +5,9 @@ name: Run Unit Tests
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master" , "coverage"]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master" , "coverage"]
 
 permissions:
   contents: read
@@ -18,22 +18,21 @@ jobs:
     runs-on: ubuntu-latest  # tester apps
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.11"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest # skip flake8
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi  #; another-command | fi=finale | [] are matters!
-    # - name: Lint with flake8
-      # run: |
-    #     # stop the build if there are Python syntax errors or undefined names
-    #     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-    #     # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-    #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with unittest
-      run: |
-        python -m unittest
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          python -m pip install coverage
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi  #; another-command | fi=finale | [] are matters!
+      - name: Test with unittest
+        run: |
+          python -m unittest
+      - name: Generate a coverage report
+        run: |
+          coverage run -m test_statistics
+          coverage report

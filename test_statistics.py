@@ -1,6 +1,6 @@
 """Unit tests for the statistics module."""
 from unittest import TestCase
-from statistics import variance, stdev
+from statistics import variance, stdev, average
 from math import sqrt
 
 
@@ -29,8 +29,40 @@ class StatisticsTest(TestCase):
         # variance([0, 0.5, 1, 1.5, 2.0]) is 0.5
         self.assertEqual(sqrt(0.5), stdev([0, 0.5, 1, 1.5, 2]))
 
+    def test_average(self):
+        """Test the average function."""
+        self.assertEqual(0.0, average([0.0]))
+        self.assertEqual(5.0, average([5, 5, 5, 5, 5]))
+        self.assertEqual(3.0, average([1, 2, 3, 4, 5]))
 
-if __name__ == '__main__':
-    import unittest
+    def test_average_with_empty_list(self):
+        """Test average with an empty list."""
+        with self.assertRaises(ValueError):
+            average([])
 
-    unittest.main(verbosity=1)
+    def test_variance_with_empty_list(self):
+        """Test variance with an empty list."""
+        with self.assertRaises(ValueError):
+            variance([])
+
+    def test_stdev_with_empty_list(self):
+        """Test standard deviation with an empty list."""
+        with self.assertRaises(ValueError):
+            stdev([])
+
+    def test_average_with_non_empty_list(self):
+        """Test average with a non-empty list."""
+        self.assertEqual(8.0, average([8, 9, 7]))
+
+    def test_variance_with_non_empty_list(self):
+        """Test variance with a non-empty list."""
+        self.assertAlmostEqual(variance([8, 9, 7]), 0.6666666666666666)
+
+    def test_stdev_with_non_empty_list(self):
+        """Test standard deviation with a non-empty list."""
+        self.assertAlmostEqual(stdev([8, 9, 7]), 0.816496580927726)
+
+
+# if __name__ == '__main__':
+#     import unittest
+#     unittest.main(verbosity=1)
