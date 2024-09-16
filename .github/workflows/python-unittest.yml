@@ -33,5 +33,5 @@ jobs:
           python -m unittest
       - name: Generate a coverage report
         run: |
-          coverage run -m unittest
+          coverage run -m test_statistics
           coverage report
