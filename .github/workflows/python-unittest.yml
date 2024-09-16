@@ -32,7 +32,10 @@ jobs:
       - name: Test with unittest
         run: |
           python -m unittest
+      - name: Run tests with coverage
+        run: |
+          coverage run --branch -m unittest
       - name: Generate a coverage report
         run: |
-          coverage run -m test_statistics
           coverage report
+          coverage html
